@@ -1,0 +1,26 @@
+% Pre-plot data processing.
+
+% Initialize cell-arrays.
+dataset = cell(1,numFiles);
+for idx = 1:numFiles
+  if interpEnable
+      dataset{idx} = zeros(numPoints,length(fieldnames(index)));
+      % Create numPoints-frequency array from fmin to fmax.
+      dataset{idx}(:,index.frequency_Hz) = ...
+          linspace(min(importDataset{idx}(:,index.frequency_Hz)), ...
+                   max(importDataset{idx}(:,index.frequency_Hz)), numPoints);
+      % Intrerpolation at the new frequency array.
+      dataset{idx}(:,index.magnitude_dB) = ...
+          interp1(importDataset{idx}(:,index.frequency_Hz), ...
+                  importDataset{idx}(:,index.magnitude_dB), ...
+                  dataset   {idx}(:,index.frequency_Hz));
+      dataset{idx}(:,index.angle_deg   ) = ...
+          interp1(importDataset{idx}(:,index.frequency_Hz), ...
+                  importDataset{idx}(:,index.angle_deg   ), ...
+                  dataset   {idx}(:,index.frequency_Hz));
+  else
+    % NO interpolation.
+    dataset = importDataset;
+  end
+end
+
