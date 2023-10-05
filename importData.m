@@ -3,7 +3,7 @@ function [funcOut, fileList, numFiles] = importData(index, platformName, deviceN
 
 % DAC gains.
 gainDACx = 4095 / 2;
-gainDACy = 4095 / 2 / 20;
+gainDACy = 4095 / 2 / 300;
 
 switch deviceName
     case 'AP300'
@@ -14,8 +14,8 @@ switch deviceName
     case 'Bode100'
         % Variables: index within a file.
         fileColumnIndex.frequency_Hz = 1; % column 1
-        fileColumnIndex.magnitude_dB = 4; % column 2
-        fileColumnIndex.angle_deg    = 7; % column 3
+        fileColumnIndex.magnitude_dB = 2; % column 2
+        fileColumnIndex.angle_deg    = 3; % column 3
     otherwise
         error('USER ERROR: Unknown function parameter!');
 end

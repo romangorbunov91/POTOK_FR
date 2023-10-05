@@ -12,8 +12,8 @@ INV.ESR_Cin_tot = INV.ESR_Cin / 2;
 INV.R_dis_in_tot = 2 * 150e3;
 
 % Inductor at the output.
-INV.Lout = 300e-6;
-INV.ESR_Lout = 10e-3;
+INV.Lout = 1.1*300e-6;
+INV.ESR_Lout = 300e-3;
 % Capacitor at the output.
 INV.Cout = 15e-6;
 INV.ESR_Cout = 6e-3;
@@ -26,7 +26,7 @@ INV.ACsw_Rds_on = 55e-3;
 INV.ACsw_Vd_on = 3.3;
 
 % Input/output.
-INV.VOLTAGE_IN_NOM  = 700;
+INV.VOLTAGE_IN_NOM  = 750;
 INV.VOLTAGE_OUT_NOM = 230; % RMS.
 INV.POWER_OUT_NOM   = 2000;
 INV.OUTPUT_FREQ_NOM = 50;
