@@ -3,7 +3,7 @@ function [funcOut, fileList, numFiles] = importData(index, platformName, deviceN
 
 % DAC gains.
 gainDACx = 4095 / 2;
-gainDACy = 4095 / 2 / 300;
+gainDACy = 4095 / 2 / 20;
 
 switch deviceName
     case 'AP300'

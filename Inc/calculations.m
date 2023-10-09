@@ -35,8 +35,9 @@ paramStruct.Cout       = INV.Cout;
 paramStruct.ESR_Lout   = INV.ESR_Lout;
 paramStruct.VOLTAGE_IN = 500;
 paramStruct.TMR_PR_INV = TMR_PR_INV;
-paramStruct.loadAbs    = 15e6;
+paramStruct.Rload      = 25;
 paramStruct.loadPF     = 1.0;
+paramStruct.outFreqHz  = INV.OUTPUT_FREQ_NOM;
 
 % PWM papameters.
 paramStruct.PWM.gain = 1 / double(TMR_PR_INV);
@@ -72,8 +73,7 @@ varIndex.frequency   = uint8(1);
 varIndex.complex_mag = uint8(2);
 %==========================================================================
 % Calculations.
-NUM_OF_DATASETS = 2;
-R_var = [15e6 15];
+NUM_OF_DATASETS = 1;
 
 frDatasets = cell(1,NUM_OF_DATASETS);
 for idx = 1 : NUM_OF_DATASETS
@@ -82,9 +82,9 @@ for idx = 1 : NUM_OF_DATASETS
 %         pwrStageFunc(frequencyHz, paramStruct, 'mod_IL') .* ...
 %         gainDelayFunc(frequencyHz, paramStruct.delayLOOP) .* ...
 %         IIR_func(frequencyHz, paramStruct.MAF);
-    paramStruct.loadAbs = R_var(idx);
+
     frDatasets{idx}(:,varIndex.complex_mag) = ...
-        pwrStageFunc(frequencyHz, paramStruct, 'mod_UC') .* ...
+        2 / paramStruct.VOLTAGE_IN * pwrStageFunc(frequencyHz, paramStruct, 'mod_UC') .* ...
         gainDelayFunc(frequencyHz, paramStruct.delayLOOP);
 
     frDatasets{idx}(:,varIndex.frequency  ) = frequencyHz;

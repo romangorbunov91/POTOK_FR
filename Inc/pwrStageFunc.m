@@ -23,20 +23,26 @@ function outputDataset = pwrStageFunc(frequencyHz, inputStruct, funcType)
 
 
 % Transfer function parameters.
-Uin      = inputStruct.VOLTAGE_IN;
-loadAbs  = inputStruct.loadAbs;
-loadPF   = inputStruct.loadPF;
-%Lload = paramStruct.Lload;
-L        = inputStruct.Lout;
-C        = inputStruct.Cout;
-rL       = inputStruct.ESR_Lout;
+Uin       = inputStruct.VOLTAGE_IN;
+Rload     = inputStruct.Rload;
+loadPF    = inputStruct.loadPF;
+L         = inputStruct.Lout;
+C         = inputStruct.Cout;
+rL        = inputStruct.ESR_Lout;
+outFreqHz = inputStruct.outFreqHz;
 
 % Complex frequency.
 s = 1i * 2 * pi * frequencyHz;
 
 % Parameters of the transfer functions.
-%Zload = Rload + s * Lload;
-Zload = loadAbs * exp(1i * acos(loadPF));
+% Load (R||L).
+if loadPF < 1
+    Lload = Rload / (2 * pi * outFreqHz) / sqrt(1 / loadPF^2 - 1);
+    Zload = s * Lload ./ (1 + s * Lload / Rload);
+else
+    Zload = Rload;
+end
+
 Qw0 = 1 ./ (L ./ Zload + rL * C);
 omega0_sq = 1 / (L *C);
 omegaL = rL / L;
