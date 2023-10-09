@@ -1,24 +1,14 @@
-function [funcOut, fileList, numFiles] = importData(index, platformName, deviceName)
+function [funcOut, fileList, numFiles] = importData(index, platformName)
 % Import DATA from 'data'-folder.
 
 % DAC gains.
 gainDACx = 4095 / 2;
 gainDACy = 4095 / 2 / 20;
 
-switch deviceName
-    case 'AP300'
-        % Variables: index within a file.
-        fileColumnIndex.frequency_Hz = 1; % column 1
-        fileColumnIndex.magnitude_dB = 2; % column 2
-        fileColumnIndex.angle_deg    = 3; % column 3
-    case 'Bode100'
-        % Variables: index within a file.
-        fileColumnIndex.frequency_Hz = 1; % column 1
-        fileColumnIndex.magnitude_dB = 2; % column 2
-        fileColumnIndex.angle_deg    = 3; % column 3
-    otherwise
-        error('USER ERROR: Unknown function parameter!');
-end
+% Variables: index within a file.
+fileColumnIndex.frequency_Hz = 1; % file column 1
+fileColumnIndex.magnitude_dB = 2; % file column 2
+fileColumnIndex.angle_deg    = 3; % file column 3
 
 folder = 'importData/';
 fileList = ls(folder);
@@ -37,12 +27,7 @@ outputData = cell(1, numFiles);
 for idx = 1:numFiles
     switch platformName
         case 'Octave'
-            switch deviceName
-                case 'AP300'
-                    importData{idx} = dlmread(strcat(folder, fileList(idx,:)));
-                case 'Bode100'
-                    importData{idx} = dlmread(strcat(folder, fileList(idx,:)), ";", 1, 0);
-            end
+            importData{idx} = dlmread(strcat(folder, fileList(idx,:)));
             % Delete the 1st row (columns' titles).
             importData{idx}(1,:) = [];
         case 'Matlab'

@@ -5,7 +5,6 @@ clear; clc;
 %===============================================================================
 % User-defined parameters.
 platformName = 'Matlab'; % 'Matlab' or 'Octave'
-deviceName = 'AP300'; % 'AP300' or 'Bode100'
 % Data interpolation enable.
 interpEnable = false; % true/false
 % Number of interpolation points.
@@ -17,7 +16,7 @@ index.magnitude_dB = 2;
 index.angle_deg    = 3;
 
 % Import DATA from 'importData'-folder.
-[importDataset, fileList, numFiles] = importData(index, platformName, deviceName);
+[importDataset, fileList, numFiles] = importData(index, platformName);
 
 % Pre-plot data processing.
 run('Inc/processing.m');
