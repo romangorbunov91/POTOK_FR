@@ -2,13 +2,13 @@ function [funcOut, fileList, numFiles] = importData(index, platformName)
 % Import DATA from 'data'-folder.
 
 % DAC gains.
-gainDACx = 4095 / 2;
-gainDACy = 4095 / 2 / 20;
+gainDACx = 4095 / 2 / 40;
+gainDACy = 4095 / 2 / 40;
 
 % Variables: index within a file.
-fileColumnIndex.frequency_Hz = 1; % file column 1
-fileColumnIndex.magnitude_dB = 2; % file column 2
-fileColumnIndex.angle_deg    = 3; % file column 3
+fileColumnIndex.frequency_Hz = uint8(1); % file column 1
+fileColumnIndex.magnitude_dB = uint8(2); % file column 2
+fileColumnIndex.angle_deg    = uint8(3); % file column 3
 
 folder = 'importData/';
 fileList = ls(folder);

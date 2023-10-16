@@ -20,7 +20,9 @@ index.angle_deg    = 3;
 
 % Pre-plot data processing.
 run('Inc/processing.m');
-run('Inc/calculations.m');
+%run('Inc/calculations.m');
+
 % Plots.
-plotData = complex2bode( frDatasets );
+%plotData = complex2bode( frDatasets );
+plotData = [];
 run('Inc/plotBode.m');
